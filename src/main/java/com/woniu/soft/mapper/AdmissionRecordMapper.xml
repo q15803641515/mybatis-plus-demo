@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.woniu.soft.mapper.AdmissionRecordMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.woniu.soft.entity.AdmissionRecord">
+        <id column="id" property="id" />
+        <result column="uid" property="uid" />
+        <result column="complaint" property="complaint" />
+        <result column="Illness_history" property="illnessHistory" />
+        <result column="past_history" property="pastHistory" />
+        <result column="personal_history" property="personalHistory" />
+        <result column="family_history" property="familyHistory" />
+        <result column="text" property="text" />
+        <association property="user"  column="id" select="findUser" />
+    </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, uid, complaint, Illness_history, past_history, personal_history, family_history, text
+    </sql>
+	
+	<select id="findUser" resultType="com.woniu.soft.entity.User">
+		select * from user where id = #{parentId}
+	</select>
+</mapper>
